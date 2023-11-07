@@ -23,7 +23,7 @@ const Chat = () => {
   return (
     <Container className="chat-container">
       <Grid container spacing={2} className="chat-grid">
-        <Grid item xs={12} className="chat-messages" style={{ height: '80%' }}>
+        <Grid item xs={12} className="chat-messages" style={{ height: '90%', display:'flex', flexDirection:'column' }}>
           {fakeMessages.map((msg, index) => (
             <div
               key={index}
@@ -33,18 +33,26 @@ const Chat = () => {
             </div>
           ))}
         </Grid>
-        <Grid item xs={12} className="chat-input" style={{ height: '20%' }}>
-          <TextField
-            fullWidth
-            type="text"
-            placeholder="Saisissez votre message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            style={{width:'80%'}}
-          />
-          <Button variant="contained" color="primary" onClick={handleSendMessage}>
-            Envoyer
-          </Button>
+        <Grid item xs={12} className="chat-input">
+          <div style={{ display: 'flex', height: '100%', width: '100%', justifyContent: 'space-evenly', alignItems: 'center' }}>
+            <TextField
+              fullWidth
+              type="text"
+              id="sendMessage"
+              placeholder="Saisissez votre message..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              style={{ width: '80%' }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSendMessage}
+              style={{ width: '10%', height: '5vh' }}
+            >
+              Envoyer
+            </Button>
+          </div>
         </Grid>
       </Grid>
     </Container>

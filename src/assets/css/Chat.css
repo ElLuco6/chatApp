@@ -2,9 +2,8 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    max-width: 1600 px !important;
-    background-color: #f0f0f0;
-    margin:0;
+    margin: 0;
+    max-width: 1600px !important;
   }
   
   .chat-grid {
@@ -18,34 +17,44 @@
   
   .chat-input {
     display: flex;
-    padding: 3px;
-    background-color: #f0f0f0;
+    flex-direction: column;
+    height: 10%;
   }
   
+
+  #sendMessage {
+    background-color: white;
+    padding:1.5rem;
+    border-radius: 30px;
+    margin:0 !important;
+  }
   .user-message {
     background-color: #007BFF;
-    color: #fff;
+    color: #252121;
     align-self: flex-end;
     border-radius: 10px;
-    width:fit-content !important;
-    padding:4px;
+    width: fit-content !important;
+    padding: 4px;
+    margin-bottom:10px;
   }
-
+  
   .other-message {
     background-color: yellow;
-    color: #fff;
+    color: #252121;
     align-self: flex-start;
     border-radius: 10px;
-    width:fit-content !important;
-    padding:4px;
+    width: fit-content !important;
+    padding: 4px;
+    margin-bottom:10px;
   }
-
- body, #root {
-    width:100%;
- }
-
- @media (min-width: 1200px) {
+  
+  body, #root {
+    width: 100%;
+  }
+  
+  @media (min-width: 1200px) {
     .css-1oqqzyl-MuiContainer-root {
-      max-width: 100%; !important;
+      max-width: 100% !important;
     }
   }
+  

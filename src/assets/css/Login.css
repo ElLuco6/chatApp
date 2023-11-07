@@ -1,6 +1,9 @@
-/* FILEPATH: /c:/Users/ocean/Bureau/YNOV/p_chat/app/src/assets/css/Login.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Empêche les défilements inutiles de la fenêtre du navigateur */
+  }
 
-/* Centrer le contenu de la page */
 body {
   display: flex;
   justify-content: center;
@@ -13,7 +16,6 @@ body {
     align-items: center;
 }
 
-/* Rendre le formulaire responsive */
 form {
   display: flex;
   flex-direction: column;
