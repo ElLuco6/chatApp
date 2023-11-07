@@ -1,0 +1,44 @@
+/* FILEPATH: /c:/Users/ocean/Bureau/YNOV/p_chat/app/src/assets/css/Login.css */
+
+/* Centrer le contenu de la page */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Rendre le formulaire responsive */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="nom"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  margin-top:2px;
+}
+
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
