@@ -1,9 +1,8 @@
+import React, { useState } from "react";
+import { Grid, Container, TextField, Button } from "@mui/material";
 
-import React,{useState} from "react";
-import { Grid, Container, TextField, Button } from '@mui/material';
-
-import '../assets/css/Login.css';
-import {Link} from 'react-router-dom';
+import "../assets/css/Login.css";
+import { Link } from "react-router-dom";
 const Login = () => {
   const [nom, setNom] = useState("");
   return (
@@ -19,7 +18,11 @@ const Login = () => {
           onChange={(e) => setNom(e.target.value)}
           required
         />
-        <Link to={`/chat?nom=${nom}`}><button type="submit">Se connecter</button></Link>
+        <Link to={`/chat?nom=${nom}`}>
+          <button type="submit" style={{ width: "100%" }}>
+            Se connecter
+          </button>
+        </Link>
       </form>
     </div>
   );

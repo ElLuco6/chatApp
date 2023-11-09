@@ -5,6 +5,8 @@ import socketIO from "socket.io-client";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 const Chat = () => {
+  const socket = socketIO.connect("http://localhost:3000");
+
   const [nom, setNom] = useState("");
 
   const navigate = useNavigate();
@@ -61,7 +63,11 @@ const Chat = () => {
           padding: "1vh",
         }}
       >
-        <button type="submit" onClick={BtnDeco}>
+        <button
+          type="submit"
+          onClick={BtnDeco}
+          style={{ width: "10%", marginRight: "1vh" }}
+        >
           Se deco
         </button>
 
@@ -122,3 +128,10 @@ const Chat = () => {
 };
 
 export default Chat;
+
+/*
+ <Container style={{display:'flex',flexDirection:'row',width:'100%'}}>
+      <Container style={{width:'20%',backgroundColor:'white '}}>
+<h1>Raler</h1>
+      </Container>
+    </Container>*/
