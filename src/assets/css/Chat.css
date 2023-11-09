@@ -28,7 +28,7 @@
     border-radius: 30px;
     margin:0 !important;
   }
-  .user-message {
+  .user1 {
     background-color: #007BFF;
     color: #252121;
     align-self: flex-end;
@@ -38,7 +38,7 @@
     margin-bottom:10px;
   }
   
-  .other-message {
+  .user2 {
     background-color: yellow;
     color: #252121;
     align-self: flex-start;
