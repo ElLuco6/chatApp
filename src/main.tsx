@@ -5,17 +5,23 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-
 import Login from './pages/Login';
 import Chat from './pages/Chat';
+import socketIO from 'socket.io-client';
+
+const socket = socketIO.connect('http://localhost:3000');
+socket.on("connect", () => {
+  console.log("SOCKET ID"+socket.id); // x8WIv7-mJelg7on_ALbx
+});
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login/>,
+    element:<Login socket={socket}/>
   },
   {
     path: "/chat",
-    element: <Chat/>,
+    element: <Chat socket={socket}/>,
   },
 ]);
 
