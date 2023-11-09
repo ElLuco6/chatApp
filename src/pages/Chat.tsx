@@ -24,7 +24,7 @@ const Chat = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const nomParam = searchParams.get("nom");
     const savedChannelChoice = localStorage.getItem("channelChoice");
-    const savedMessages = JSON.parse(localStorage.getItem(savedChannelChoice));
+    const savedMessages = JSON.parse(localStorage.getItem(channelChoice));
 
     if (nomParam) {
       setNom(nomParam);
@@ -55,12 +55,7 @@ const Chat = () => {
     localStorage.setItem(channelChoice, JSON.stringify(messages));
   };
 
-  const getLocalStorage = () => {
-    const recipe = localStorage.getItem(channelChoice);
-    if (recipe) {
-      setMessages(JSON.parse(recipe));
-    }
-  };
+  
 
   const BtnDeco = () => {
     socket.on("disconnect", () => {
@@ -157,7 +152,7 @@ const Chat = () => {
               <div
                 key={index}
                 className={`message ${
-                  msg.sender.nom === "user1" ? "user1" : "user2"
+                  msg.sender.nom === nom ? "user1" : "user2"
                 }`}
               >
                 {msg.text}
