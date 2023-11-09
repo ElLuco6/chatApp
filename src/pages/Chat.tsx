@@ -2,64 +2,79 @@ import React, { useState, useEffect } from "react";
 import { Grid, Container, TextField, Button } from "@mui/material";
 import "../assets/css/Chat.css";
 import socketIO from "socket.io-client";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 const socket = socketIO.connect("http://localhost:3000");
 
-const onConnect = () => {
-  console.log("Connected socket");
-  console.log(socket.id);
-};
-
-socket.on("connect", onConnect);
-
-socket.on("message", function (data) {
-  console.log("message", data);
-});
-
 const Chat = () => {
+  const [channelChoice, setChannelChoice] = useState("channel1");
+
+  const [channels, setChannels] = useState([
+    "channel1",
+    "channel2",
+    "channel3",
+    "channel4",
+  ]);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-
   const [nom, setNom] = useState("");
-
   const navigate = useNavigate();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const nomParam = searchParams.get("nom");
-    console.log(nomParam);
+    const savedChannelChoice = localStorage.getItem("channelChoice");
+    const savedMessages = JSON.parse(localStorage.getItem(savedChannelChoice));
 
     if (nomParam) {
       setNom(nomParam);
     }
 
-    socket.on("message", function (data) {
+    if (savedMessages) {
+      setMessages(savedMessages);
+    }
+
+    console.log(channelChoice);
+    socket.on("message." + channelChoice, function (data) {
+      console.log("socket on");
       const [senderNom, receivedMessage] = data;
-      setMessages([
-        ...messages,
+      console.log("data" + data);
+      setMessages((prevMessages) => [
+        ...prevMessages,
         { text: receivedMessage, sender: { nom: senderNom } },
       ]);
+      saveToLocalStorage();
     });
-  }, [messages]);
+
+    return () => {
+      socket.off("message." + channelChoice);
+    };
+  }, [channelChoice, channels]);
+
+  const saveToLocalStorage = () => {
+    localStorage.setItem(channelChoice, JSON.stringify(messages));
+  };
+
+  const getLocalStorage = () => {
+    const recipe = localStorage.getItem(channelChoice);
+    if (recipe) {
+      setMessages(JSON.parse(recipe));
+    }
+  };
 
   const BtnDeco = () => {
     socket.on("disconnect", () => {
-      console.log(socket.id); // undefined
+      console.log(socket.id);
     });
     alert("Deconnected");
+    localStorage.clear();
     navigate("/");
   };
 
   const handleSendMessage = () => {
     if (message) {
-      /*
-      setMessages([...messages, { text: message, sender: { nom } }]);*/
       setMessage("");
-
-      socket.emit("message", [nom, message]);
+      socket.emit("message", [nom, message, channelChoice]);
     }
   };
 
@@ -78,12 +93,44 @@ const Chat = () => {
         padding: 0,
       }}
     >
-      <Container
-        style={{ width: "30%", height: "100vh", backgroundColor: "red" }}
-      >
-        <h1>Channel</h1>
+      <Container className="containerLeft">
+        <div
+          style={{
+            width: "100%",
+            height: "60%",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <h2>{channelChoice}</h2>
+
+          {channels.map((channel, index) => (
+            <div
+              key={index}
+              className="ChannelView"
+              onClick={() => {
+                setChannelChoice(channel);
+                setMessages([]);
+                console.log("CHANNEL CHOICE" + channelChoice);
+                saveToLocalStorage();
+              }}
+            >
+              <h3> {channel}</h3>
+            </div>
+          ))}
+        </div>
+        <div style={{ alignSelf: "flex-end", margin: "1vh", width: "100%" }}>
+          <button
+            type="submit"
+            onClick={BtnDeco}
+            style={{ width: "100%", marginRight: "1vh" }}
+          >
+            Se deco
+          </button>
+        </div>
       </Container>
-      <Container className="chat-container" style={{ widht: "70%" }}>
+      <Container className="chat-container" style={{ widht: "75%" }}>
         <div
           style={{
             width: "100%",
@@ -96,15 +143,7 @@ const Chat = () => {
             padding: "1vh",
           }}
         >
-          <button
-            type="submit"
-            onClick={BtnDeco}
-            style={{ width: "10%", marginRight: "1vh" }}
-          >
-            Se deco
-          </button>
-
-          <h2>User {nom}</h2>
+          <h2>Mon nom utilisateur : {nom}</h2>
         </div>
         <hr />
         <Grid container spacing={2} className="chat-grid">

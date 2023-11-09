@@ -19,7 +19,7 @@ const Login = () => {
           required
         />
         <Link to={`/chat?nom=${nom}`}>
-          <button type="submit" style={{ width: "100%" }}>
+          <button type="submit" style={{ width: "100%", backgroundColor:'#0F3C4F' }}>
             Se connecter
           </button>
         </Link>
