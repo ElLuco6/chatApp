@@ -5,17 +5,22 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
+import SignIn from './pages/SignIn';
+import SignOut from './pages/SignOut';
+import HomePage from './pages/HomePage';
 
-import Login from './pages/Login';
-import Chat from './pages/Chat';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login/>,
+    element: <HomePage/>,
   },
   {
-    path: "/chat",
-    element: <Chat/>,
+    path: "/signin",
+    element: <SignIn/>,
+  },
+  {
+    path: "/signOut",
+    element: <SignOut/>,
   },
 ]);
 
