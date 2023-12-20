@@ -21,11 +21,12 @@ const router = createBrowserRouter([
   {
     path: "/signOut",
     element: <SignOut/>,
-  },
+  }
+ 
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
